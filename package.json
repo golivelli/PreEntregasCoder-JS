@@ -1,0 +1,20 @@
+{
+  "name": "juegonumeros",
+  "version": "1.0.0",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "scanTailwind": "npx tailwindcss -i ./src/css/output.css -o ./src/css/input.css --watch" 
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  
+  "dependencies": {
+    "node": "^22.5.1"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.6"
+  }
+}
