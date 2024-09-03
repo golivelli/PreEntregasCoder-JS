@@ -1,5 +1,7 @@
 // PRE-ENTREGA 2
 // COTIZADOR DE SEGUROS
+
+// COTIZADOR
 const tipoDeSeguros = [
   {
     id: 0, // ID para identificar el plan.
@@ -38,7 +40,7 @@ const planes = [
   },
   {
     id: 1,
-    aseguradora_id: 0, 
+    aseguradora_id: 0,
     tipo_id: 0,
     tipo: "Intermedio",
     precio: 15000,
@@ -46,7 +48,7 @@ const planes = [
   },
   {
     id: 2,
-    aseguradora_id: 0, 
+    aseguradora_id: 0,
     tipo_id: 0,
     tipo: "Completo",
     precio: 22150,
@@ -54,24 +56,24 @@ const planes = [
   },
   {
     id: 3,
-    aseguradora_id: 0, 
-    tipo_id: 1, 
+    aseguradora_id: 0,
+    tipo_id: 1,
     tipo: "Basico",
     precio: 4700,
     cobertura: "Responsabilidad Civil",
   },
   {
     id: 4,
-    aseguradora_id: 0, 
-    tipo_id: 1, 
+    aseguradora_id: 0,
+    tipo_id: 1,
     tipo: "Intermedio",
     precio: 8950,
     cobertura: "Tercero Completo",
   },
   {
     id: 5,
-    aseguradora_id: 0, 
-    tipo_id: 1, 
+    aseguradora_id: 0,
+    tipo_id: 1,
     tipo: "Completo",
     precio: 11450,
     cobertura: "Todo Riesgo",
@@ -105,7 +107,7 @@ const planes = [
   {
     id: 9,
     aseguradora_id: 1,
-    tipo_id: 1, 
+    tipo_id: 1,
     tipo: "Basico",
     precio: 5000,
     cobertura: "Responsabilidad Civil",
@@ -113,7 +115,7 @@ const planes = [
   {
     id: 10,
     aseguradora_id: 1,
-    tipo_id: 1, 
+    tipo_id: 1,
     tipo: "Intermedio",
     precio: 9200,
     cobertura: "Tercero Completo",
@@ -121,7 +123,7 @@ const planes = [
   {
     id: 11,
     aseguradora_id: 1,
-    tipo_id: 1, 
+    tipo_id: 1,
     tipo: "Completo",
     precio: 10000,
     cobertura: "Todo Riesgo",
@@ -129,7 +131,7 @@ const planes = [
 
   // Planes de Sancor Seguros (aseguradora_id: 2)
   {
-    id: 0, 
+    id: 0,
     tipo_id: 0,
     tipo: "Basico",
     precio: 8000,
@@ -188,12 +190,8 @@ const cotizar = () => {
       tipoSeg === null ||
       (tipoSeg !== "auto" && tipoSeg !== "moto" && tipoSeg !== "cancelar")
     ) {
-      console.log(
-        "Ingreso no válido, por favor ingrese una opción válida (Auto - Moto, Cancelar)."
-      );
-      tipoSeg = prompt(
-        "Si desea realizar una cotización, por favor ingrese una opción (Auto - Moto, Cancelar)."
-      ).toLowerCase();
+      console.log("Ingreso no válido, por favor ingrese una opción válida (Auto - Moto, Cancelar).");
+      tipoSeg = prompt("Si desea realizar una cotización, por favor ingrese una opción (Auto - Moto, Cancelar).").toLowerCase();
     }
 
     if (tipoSeg === "cancelar") {
@@ -211,7 +209,7 @@ const cotizar = () => {
     const tipoSeg = tipoDeSeguros.find((seguro) => seguro.name.toLowerCase() == tipoDeSeguro);
 
     if (!tipoSeg) {
-      console.log("No existe el tipo de seguro : " + tipoDeSeguro);
+      console.log("No existe el tipo de seguro: " + tipoDeSeguro);
       return;
     }
 
@@ -224,9 +222,7 @@ const cotizar = () => {
       );
 
       if (planesAseguradora.length === 0) {
-        console.log(
-          "No hay planes disponibles para esta aseguradora."
-        );
+        console.log("No hay planes disponibles para esta aseguradora.");
         return;
       }
 
@@ -294,7 +290,7 @@ const cotizar = () => {
   }
 
   // Función para "Buscar por Cobertura".
-  function buscarPorCobertura(tipoDeSeguro) {
+  function buscarPorCobertura() {
     let continuarBusqueda = prompt("¿Desea buscar una cobertura específica? (Sí - No)").toLowerCase();
 
     while (
@@ -338,15 +334,6 @@ const cotizar = () => {
       } else {
         console.log("No existe esa cobertura.");
       }
-
-      // if (coberturasFiltradas) {
-      //   console.log(`Aseguradora: ${cobertura.aseguradora_id}, Plan: ${cobertura.cobertura}, Precio: ${cobertura.precio}`);
-      // }
-
-      // if(!coberturasFiltradas.length === 0){
-      //   console.log("No existe la cobertura ingresada");
-      //   return
-      // }
     }
   }
 

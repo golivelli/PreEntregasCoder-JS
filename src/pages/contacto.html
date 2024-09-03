@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto | Olivelli</title>
+  <!-- Tailwind / CSS -->
+  <link rel="stylesheet" href="../css/input.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <header>
+    <nav class="nav">
+      <ul class="list bg-purple-500">
+        <li class="list-none text-center cursor-pointer menu-container">
+          <!-- MENU -->
+          <div id="open-menu-btn" class="dm-sans-300 flex gap-2 mx-auto text-white uppercase border-white hover:border-b-2"> <!-- BTN-MENU -->
+            <li class="dm-sans-300 text-white uppercase border-white hover:border-b-2">
+              <a href="./cotizar.html" class="block py-4 px-0 no-underline text-white">Cotizar</a>
+            </li>
+          </div>
+            <!-- SUB-MENU -->
+            <!-- <ul id="menu" class="list-show bg-slate-400"> 
+              <li class="dm-sans-300 uppercase border-white px-5 hover:bg-slate-600">
+                <a href="" class="block py-4 px-0 no-underline text-white">Auto</a>
+              </li>
+              <li class="dm-sans-300 text-white uppercase border-white px-4 hover:bg-slate-600">
+                <a href="" class="block py-4 px-0 no-underline text-white">Moto</a>
+              </li>
+            </ul> -->
+        </li>
+        <li class="dm-sans-300 text-white uppercase h-16 flex border-white hover:border-b-2">
+          <a href="/index.html" class="block py-4 px-2 no-underline text-white">Inicio</a>
+        </li>
+        <li class="dm-sans-300 text-white uppercase h-16 flex border-white hover:border-b-2">
+          <a href="./contacto.html" class="block py-4 px-2 no-underline text-white">Contacto</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main class="h-section bg-purple-100">
+    <div class="relative">
+      <!-- SACAR HIDDEN CUANDO CLICKEA -->
+      <div id="mostrarErrores" class="hidden label absolute mt-3 mr-3 top-0 right-0 w-1/5 p-2 shadow shadow-red-400 dm-sans-normal rounded-lg text-base text-start"></div> 
+      <div id="mostrarEnviado" class="absolute mt-3 mr-3 top-0 right-0 w-1/5 p-2 bg-green-200 border-2 border-green-500 dm-sans-normal text-base text-green-500 font-semibold shadow shadow-green-400 rounded-lg text-center"></div>
+    </div>
+    <section>
+      <div class="flex flex-col justify-center items-center relative w-auto top-24 gap-6">
+        <h1 class="dm-sans-600-normal text-4xl text-purple-500 text-shadow">Contacto</h1>
+      </div>
+    </section>
+    <section>
+      <div class="flex items-center justify-center gap-20 top-20 relative">
+        <div class="w-1/4 flex flex-col justify-center items-start gap-5">
+          <p class="w-auto dm-sans-600-normal text-xl text-purple-700 text-shadow-2">Espero que la experiencia haya sido de tu agrado y que hayas encontrado la información que necesitabas. 
+            Si tienes alguna pregunta, sugerencia, o simplemente quieres ponerte en contacto conmigo, 
+            te invito a llenar este breve formulario. ¡Estoy aquí para ayudarte!</p>
+          <p class="dm-sans-600-normal text-xl text-purple-700 text-shadow-2">Ademas te dejo mis redes.</p>
+          <div class="flex flex-row gap-5">
+            <a href="https://github.com/golivelli" target="_blank"><img src="../assets/networks/github.png" alt="GitHub" class="w-8 h-8 ease-in-out duration-500 hover:scale-110"></a>
+            <a href="https://www.linkedin.com/in/geronimo-olivelli-a6a6301a7/" target="_blank"><img src="../assets/networks/linkedin.png" alt="Linkedin" class="w-8 h-8 ease-in-out duration-500 hover:scale-110"></a>
+            <a href="https://www.instagram.com/gero_olivelli/" target="_blank"><img src="../assets/networks/instagram.png" alt="Instagram" class="w-8 h-8 ease-in-out duration-500 hover:scale-110"></a>
+          </div>
+        </div>
+        <!-- Start Form -->
+        <div class="w-auto relative top-16 flex flex-col flex-wrap items-start content-center">
+          <form action="" id="form" method="get" class="flex flex-col gap-4">
+            <div class="flex flex-col gap-7">
+              <div class="flex flex-row gap-8">
+                <p class="flex flex-col">
+                  <label for="taste_1" class="dm-sans-normal text-purple-500 text-lg font-semibold text-shadow-2">Nombre</label>
+                  <input type="text" id="nombre" name="nombre" maxlength="20" placeholder="Ingresa su nombre." value="" class="dm-sans-normal p-2 rounded-lg border-2 border-purple-500 shadow shadow-purple-400"/>
+                </p>
+                <p class="flex flex-col">
+                  <label for="apellido" class="dm-sans-normal text-purple-500 text-lg font-semibold text-shadow-2">Apellido</label>
+                  <input type="text" id="apellido" name="apellido" maxlength="30" placeholder="Ingresa su apellido." class="dm-sans-normal p-2 rounded-lg border-2 border-purple-500 shadow shadow-purple-400"/>
+                </p>
+              </div>
+              <div class="flex flex-col">
+                <label for="telefono" class="dm-sans-normal text-purple-500 text-lg font-semibold text-shadow-2">Telefono</label>
+                <input type="tel" id="telefono" name="telefono" maxlength="12" placeholder="Ingresa su telefono." class="dm-sans-normal p-2 rounded-lg border-2 border-purple-500 shadow shadow-purple-400"/>
+              </div>
+              <div class="flex flex-col">
+                <label for="email" class="dm-sans-normal text-purple-500 text-lg font-semibold text-shadow-2">Correo</label>
+                <input type="email" id="email" name="email" placeholder="Ingresa su correo." class="dm-sans-normal p-2 rounded-lg border-2 border-purple-500 shadow shadow-purple-400"/>
+              </div>
+              <div class="flex flex-col">
+                <label for="msj" class="dm-sans-normal text-purple-500 text-lg font-semibold text-shadow-2">Mensaje</label>
+                <textarea id="mensaje" class="resize-none dm-sans-normal p-2 rounded-lg border-2 border-purple-500 shadow shadow-purple-400" placeholder="Ingresa tu mensaje."></textarea>
+              </div>
+              <!-- Container btn Subimit/Delete -->
+              <div class="flex flex-row gap-10 justify-center items-center">
+                <p class="text-purple-500 dm-sans-600-italic text-center text-shadow-2">¡Agradezco tu mensaje!</p>
+                <input type="submit" id="idBtnSubmit" name="btn-submit" value="Contactame" class="btn-submit hover:scale-95 text_button dm-sans-600-italic text-purple-500 shadow shadow-purple-400">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section> 
+  </main>
+  <script src="../js/form.js"></script>
+</body>
+</html>
+
+<!-- TIPOS DE INPUT -->
+<!-- <input type="text"> -->
+<!-- <input type="radio"> -->
+<!-- <input type="checkbox"> -->
+<!-- <input type="submit"> -->
+<!-- <input type="number"> -->
+<!-- <input type="email"> -->
+<!-- <input type="password"> -->
+<!-- <input type="button"> -->
+<!-- <input type="file"> -->
+<!-- <input type="color"> -->
+<!-- <input type="search"> -->
+<!-- <input type="url"> -->
+<!-- <input type="tel"> -->
+<!-- <input type="date - datetime-local - week - month"> -->
+
+<!-- Multiple Select Box -->
+<!-- <select>
+  <option value="HTML">Select a Language</option>
+  <option value="HTML">HTML</option>
+  <option value="CSS">CSS</option>
+  <option value="JavaScript">JavaScript</option>
+  <option value="React">React</option>
+</select> -->

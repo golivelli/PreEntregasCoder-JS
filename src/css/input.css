@@ -1,24 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Header */
-/* li{
-  animation: transitionX;
+/* Fonts */
+.dm-sans-300 {
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
 }
 
-@keyframes transitionX {
-  0%{
-    border-bottom: 0px black;
-  }
-  100%{
-    border-bottom: 8px black;
-  }
+.dm-sans-normal {
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+}
+
+.dm-sans-600-normal {
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.dm-sans-600-italic {
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.text-shadow-2{
+  text-shadow: 1px 2px #e9d5ff;
+}
+
+/* Menu Desplegable */
+.nav{
+  width: 100%;
+}
+
+.list{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-direction: row;
+}
+
+/* .menu-container {
+  position : relative;
+}
+
+#menu {
+  position: absolute;
+  bottom: -163%;
+  display : none;
+}
+
+#menu.menu-active {
+  display : block;
 } */
+
+.nav-link--inside:hover{
+  background: #F6F8FA;
+} 
 
 /* Main (Section 1) */
 .h-section{
-  height: 100vh;
+  height: 93vh;
 }
 
 .text-shadow{
@@ -29,9 +81,8 @@
   top: -45%;
 }
 
-
-/* Button Jugar Ahora */
-button {
+/* Bottom (Cotizar) */
+.btn-cotizar {
   border: none;
   position: relative;
   width: 250px;
@@ -47,7 +98,7 @@ button {
   transform: translateY(8px)
 }
 
-button:after {
+.btn-cotizar:after {
   content: '';
   position: absolute;
   left: 0;
@@ -57,11 +108,10 @@ button:after {
   transition: all 2s ease;
 }
 
-button span {
+.btn-cotizar span {
   position: absolute;
   width: 100%;
   font-size: 15px;
-  font-weight: 100;
   left: 50%;
   top: 39%;
   letter-spacing: 3px;
@@ -71,11 +121,11 @@ button span {
   transition: all 2s ease;
 }
 
-button:hover span {
+.btn-cotizar:hover span {
   color: white;
 }
 
-button:before {
+.btn-cotizar:before {
   content: '';
   position: absolute;
   width: 0;
@@ -87,6 +137,245 @@ button:before {
   transition: all 1s ease;
 }
 
-button:hover:before {
+.btn-cotizar:hover:before {
   width: 100%;
+}
+
+.hover\:scale-105:hover {
+  --tw-scale-x: 1.05;
+  --tw-scale-y: 1.05;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.hover\:border-b-2:hover {
+  border-bottom-width: 2px;
+}
+
+/* Bottom Submit (Form) */
+.btn-submit {
+  /* --purple-700: #c4b5fd; */
+  --border_radius: 9999px;
+  --transtion: 0.3s ease-in-out;
+  --offset: 2px;
+
+  cursor: pointer;
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  transform-origin: center;
+
+  padding: 0.5rem 1rem;
+  background: #d8b4fe;
+  /* background-color: #8b5cf6; */
+
+  border: 2px #a855f7 solid;
+  border-radius: var(--border_radius);
+  /* transform: scale(calc(1 + (var(--active, 0) * 0.1))); */
+
+  transition: transform var(--transtion);
+}
+
+.btn-submit::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 100%;
+  height: 100%;
+  background-color: var(--purple-700);
+
+  border-radius: var(--border_radius);
+  box-shadow: white;
+
+  transition: all var(--transtion);
+  z-index: 0;
+}
+
+.btn-submit::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 100%;
+  height: 100%;
+  /* background-color: hsla(260 97% 61% / 0.75); */
+  /* background-image: radial-gradient(
+      at 51% 89%,
+      hsla(266, 45%, 74%, 1) 0px,
+      transparent 50%
+    ),
+    radial-gradient(at 100% 100%, #a855f7 0px, transparent 50%),
+    radial-gradient(at 22% 91%, #a855f7 0px, transparent 50%); */
+  background-position: top;
+
+  opacity: var(--active, 0);
+  border-radius: var(--border_radius);
+  transition: opacity var(--transtion);
+  z-index: 2;
+}
+
+.btn-submit:is(:hover, :focus-visible) {
+  --active: 1;
+}
+.btn-submit:active {
+  transform: scale(1);
+}
+
+.btn-submit .dots_border {
+  --size_border: calc(100% + 2px);
+
+  overflow: hidden;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: var(--size_border);
+  height: var(--size_border);
+  background-color: transparent;
+
+  border-radius: var(--border_radius);
+  z-index: -10;
+}
+
+.btn-submit .dots_border::before {
+  content: "";
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: left;
+  transform: rotate(0deg);
+
+  width: 100%;
+  height: 2rem;
+  /* background-color: white;
+
+  mask: linear-gradient(transparent 0%, white 120%); */
+  animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.btn-submit .sparkle {
+  position: relative;
+  z-index: 10;
+
+  width: 1.75rem;
+}
+
+.btn-submit .sparkle .path {
+  fill: currentColor;
+  stroke: currentColor;
+
+  transform-origin: center;
+
+  color: hsl(0, 0%, 100%);
+}
+
+.btn-submit:is(:hover, :focus) .sparkle .path {
+  animation: path 1.5s linear 0.5s infinite;
+}
+
+.btn-submit .sparkle .path:nth-child(1) {
+  --scale_path_1: 1.2;
+}
+.btn-submit .sparkle .path:nth-child(2) {
+  --scale_path_2: 1.2;
+}
+.btn-submit .sparkle .path:nth-child(3) {
+  --scale_path_3: 1.2;
+}
+
+@keyframes path {
+  0%,
+  34%,
+  71%,
+  100% {
+    transform: scale(1);
+  }
+  17% {
+    transform: scale(var(--scale_path_1, 1));
+  }
+  49% {
+    transform: scale(var(--scale_path_2, 1));
+  }
+  83% {
+    transform: scale(var(--scale_path_3, 1));
+  }
+}
+
+/* Element Text btn-submit (Form) */
+.btn-submit .text_button {
+  position: relative;
+  z-index: 10;
+
+  background-clip: text;
+
+  font-size: 17px;
+  color: #a855f7;
+}
+
+/* Bottom Delete (From) */
+/* .bottom-delete{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 12px;
+  gap: 8px;
+  height: 34px;
+  width: 112px;
+  border: #FF342B 2px solid;
+  background: #ff362b34;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  box-shadow: 0 1px 6px 0 #ff362b34, 0 1px 2px -1px #ff362b34;
+}
+
+.lable {
+  line-height: 20px;
+  font-size: 17px;
+  color: #FF342B;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.bottom-delete:hover .svg-icon {
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(-360deg);
+  }
+} */
+
+/* Errores */
+#mostrarErrores{
+  background-color: #ff362b34;
+  border:#FF342B 2px solid;
+}
+
+#mostrarErrores{
+  color: #FF342B;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 600;
+  font-style: normal;
 }
