@@ -1,27 +1,37 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cotizar | Olivelli</title>
-  <!-- Tailwind / CSS -->
-  <link rel="stylesheet" href="../css/input.css">
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body>
-  <header>
-    <nav class="nav">
-      <ul class="list bg-purple-500">
-        <li class=" list-none text-center cursor-pointer menu-container">
-          <!-- MENU -->
-          <div id="open-menu-btn" class="dm-sans-300 flex gap-2 mx-auto text-white uppercase border-white hover:border-b-2"> <!-- BTN-MENU -->
-            <li class="dm-sans-300 text-white uppercase border-white hover:border-b-2">
-              <a href="./cotizar.html" class="block py-4 px-0 no-underline text-white">Cotizar</a>
-            </li>
-          </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cotizar | Olivelli</title>
+    <!-- Tailwind / CSS -->
+    <link rel="stylesheet" href="../css/input.css" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <header>
+      <nav class="nav">
+        <ul class="list bg-purple-500">
+          <li class="list-none text-center cursor-pointer menu-container">
+            <!-- MENU -->
+            <div
+              id="open-menu-btn"
+              class="dm-sans-300 flex gap-2 mx-auto text-white uppercase border-white hover:border-b-2"
+            >
+              <!-- BTN-MENU -->
+              <li
+                class="dm-sans-300 text-white uppercase border-white hover:border-b-2"
+              >
+                <a
+                  href="./cotizar.html"
+                  class="block py-4 px-0 no-underline text-white"
+                  >Cotizar</a
+                >
+              </li>
+            </div>
             <!-- SUB-MENU -->
             <!-- <ul id="menu" class="list-show bg-slate-400"> 
               <li class="dm-sans-300 uppercase border-white px-5 hover:bg-slate-600">
@@ -31,89 +41,159 @@
                 <a href="" class="block py-4 px-0 no-underline text-white">Moto</a>
               </li>
             </ul> -->
-        </li>
-        <li class="dm-sans-300 text-white uppercase h-16 flex border-white hover:border-b-2">
-          <a href="/index.html" class="block py-4 px-2 no-underline text-white">Inicio</a>
-        </li>
-        <li class="dm-sans-300 text-white uppercase h-16 flex border-white hover:border-b-2">
-          <a href="./contacto.html" class="block py-4 px-2 no-underline text-white">Contacto</a>
-        </li>
-      </ul>
-    </nav>
-  </header>
-  <main class="h-section bg-purple-100">
-    <div class="w-auto flex justify-center items-center relative top-24 gap-6">
-      <h1 class="dm-sans-600-normal text-4xl text-purple-500 text-shadow">Cotizador de Seguros</h1>
-    </div>
-    <!-- Cotizador -->
-    <section class="flex justify-center items-center mt-8">
-      <div class="flex justify-center relative top-32 w-1/2 gap-32">
-        <!-- Tipo Seguros -->
-        <div class="flex flex-col items-center gap-2">
-          <label class="dm-sans-normal text-purple-500 text-lg font-semibold text-shadow-2">Seguros Disponibles</label>
-          <select class="w-42 rounded-lg border-2 border-purple-500 shadow shadow-purple-400 p-2">
-            <option class="text-center dm-sans-normal">Selecciona un Seguro</option>
-            <option value="auto" class="text-center dm-sans-normal text-base">Auto</option>
-            <option value="moto" class="text-center dm-sans-normal text-base">Moto</option>
-          </select>
+          </li>
+          <li
+            class="dm-sans-300 text-white uppercase h-16 flex border-white hover:border-b-2"
+          >
+            <a
+              href="/index.html"
+              class="block py-4 px-2 no-underline text-white"
+              >Inicio</a
+            >
+          </li>
+          <li
+            class="dm-sans-300 text-white uppercase h-16 flex border-white hover:border-b-2"
+          >
+            <a
+              href="./contacto.html"
+              class="block py-4 px-2 no-underline text-white"
+              >Contacto</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="h-section bg-purple-100">
+      <form id="cotizarSeguro">
+        <div
+          class="w-auto flex justify-center items-center relative top-24 gap-6"
+        >
+          <h1 class="dm-sans-600-normal text-4xl text-purple-500 text-shadow">
+            Cotizador de Seguros
+          </h1>
         </div>
-  
-        <!-- Aseguradoras -->
-        <div class="flex flex-col items-center gap-2">
-          <label class="dm-sans-normal text-purple-500 text-lg font-semibold text-shadow-2">Aseguradoras Disponibles</label>
-          <select class="w-50 rounded-lg border-2 border-purple-500 shadow shadow-purple-400 p-2">
-            <option class="text-center dm-sans-normal">Selecciona una Aseguradora</option>
-            <option value="auto" class="text-center dm-sans-normal text-base">Sancor Seguros</option>
-            <option value="moto" class="text-center dm-sans-normal text-base">La Holando Seguros</option>
-            <option value="moto" class="text-center dm-sans-normal text-base">El Norte Seguros</option>
-          </select>
-        </div>
-
-        <!-- Coberturas -->
-        <div class="flex flex-col items-center gap-2">
-          <label class="dm-sans-normal text-purple-500 text-lg font-semibold text-shadow-2">Coberturas Disponibles</label>
-          <select class="w-50 rounded-lg border-2 border-purple-500 shadow shadow-purple-400 p-2">
-            <option class="text-center dm-sans-normal">Selecciona una Cobertura</option>
-            <option value="auto" class="text-center dm-sans-normal text-base">Responsabilidad Civil</option>
-            <option value="moto" class="text-center dm-sans-normal text-base">Tercero Completo</option>
-            <option value="moto" class="text-center dm-sans-normal text-base">Todo Riesgo</option>
-          </select>
-        </div>
-
-        <!-- Seguro por precio -->
-        <div class="flex flex-col items-center gap-2">
-          <label class="dm-sans-normal text-purple-500 text-lg font-semibold text-shadow-2">Cotiza por Precio</label>
-          <input type="number" name="precio" id="precio" class="rounded-lg border-2 border-purple-500 shadow shadow-purple-400 p-2" placeholder="Ingresa un valor.">
-        </div>
-      </div>
-    </section>
-
-    <!-- Btn Cotizar -->
-    <section>
-      <div class="flex justify-center items-center relative bottom-52">
-
-          <button id="" class="btn-cotizar">
-            <!-- cotizar -->
+        <!-- Cotizador -->
+        <section class="flex justify-center items-center mt-8">
+          <div class="flex justify-center relative top-32 w-1/2 gap-32">
+            <!-- Tipo Seguros -->
+            <div class="flex flex-col items-center gap-2">
+              <label
+                class="dm-sans-normal text-purple-500 text-lg font-semibold text-shadow-2"
+                >Seguros Disponibles</label
+              >
+              <select
+                name="tipoSeguro"
+                id="tipoSeguro"
+                class="w-42 rounded-lg border-2 border-purple-500 shadow shadow-purple-400 p-2"
+              ></select>
+            </div>
+            <!-- Aseguradoras -->
+            <div class="flex flex-col items-center gap-2">
+              <label
+                class="dm-sans-normal text-purple-500 text-lg font-semibold text-shadow-2"
+                >Aseguradoras Disponibles</label
+              >
+              <select
+                id="selectAseguradora"
+                class="w-50 rounded-lg border-2 border-purple-500 shadow shadow-purple-400 p-2"
+              ></select>
+            </div>
+            <!-- Coberturas -->
+            <div class="flex flex-col items-center gap-2">
+              <label
+                class="dm-sans-normal text-purple-500 text-lg font-semibold text-shadow-2"
+                >Coberturas Disponibles</label
+              >
+              <select
+                id="tipoCobertura"
+                class="w-50 rounded-lg border-2 border-purple-500 shadow shadow-purple-400 p-2"
+              ></select>
+            </div>
+            <!-- Seguro por precio -->
+            <div class="flex flex-col items-center gap-2">
+              <label
+                class="dm-sans-normal text-purple-500 text-lg font-semibold text-shadow-2"
+                >Cotiza por Precio</label
+              >
+              <input
+                type="number"
+                name="precio"
+                id="precio"
+                class="rounded-lg border-2 border-purple-500 shadow shadow-purple-400 p-2"
+                min="0"
+                placeholder="Ingresa un valor."
+              />
+            </div>
+          </div>
+        </section>
+        <!-- Btn Cotizar -->
+        <div class="relative flex justify-center">
+          <button
+            id="cotizar"
+            type="submit"
+            class="btn-cotizar absolute top-40"
+          >
             <span class="dm-sans-normal uppercase">Cotizar</span>
           </button>
+        </div>
+      </form>
+      <!-- Tabla Cotización -->
+      <section class="flex justify-center items-center">
+        <table
+          id="tablaCotizacion"
+          class="z-10 border-2 border-purple-500 rounded-md top-80 relative"
+        >
+          <thead>
+            <tr>
+              <th
+                class="p-5 dm-sans-600-normal text-xl text-purple-500 text-shadow-2"
+              >
+                ID
+              </th>
+              <th
+                class="p-5 dm-sans-600-normal text-xl text-purple-500 text-shadow-2"
+              >
+                Tipo de Plan
+              </th>
+              <th
+                class="p-5 dm-sans-600-normal text-xl text-purple-500 text-shadow-2"
+              >
+                Tipo de Seguro
+              </th>
+              <th
+                class="p-5 dm-sans-600-normal text-xl text-purple-500 text-shadow-2"
+              >
+                Aseguradora
+              </th>
+              <th
+                class="p-5 dm-sans-600-normal text-xl text-purple-500 text-shadow-2"
+              >
+                Cobertura
+              </th>
+              <th
+                class="p-5 dm-sans-600-normal text-xl text-purple-500 text-shadow-2"
+              >
+                Precio
+              </th>
+            </tr>
+          </thead>
+          <tbody id="tablaBody">
+            <tr>
+              <td colspan="6" class="text-center p-2">Completa los filtros para obtener resultados</td>
+            </tr> 
+          </tbody>
+        </table>
+      </section>
 
-      </div>
-    </section>
-
-    <!-- Tabla Cotización -->
-    <section>
-      <div id="cotizacion" class="hidden"></div>
-    </section>
-
-    <!-- Errores -->
-    <section class="flex justify-center items-center relative top-64">
-      <!-- hidden -->
-      <div id="erroresCotizacion" class="hidden absolute p-5 rounded-md dm-sans-normal w-auto"></div>
-    </section>
-    
-  </main>
-  <script src="../js/main.js"></script>
-</body>
+      <!-- Errores -->
+      <section class="flex justify-center items-center">
+        <!-- hidden, absolute p-5 rounded-md dm-sans-normal w-auto -->
+        <div
+          id="erroresCotizacion"
+          class="hidden z-10 absolute bottom-96 w-auto p-3 shadow shadow-red-400 dm-sans-normal rounded-lg text-base text-start"
+        ></div>
+      </section>
+    </main>
+    <script src="../js/main.js"></script>
+  </body>
 </html>
-
-

@@ -1,16 +1,15 @@
-// PRE-ENTREGA 2
-// COTIZADOR DE SEGUROS
+// PRE-ENTREGA 3
 
 // FORMULARIO
-// Validar Campo Nombre. 
+// Validar Campo (Nombre). 
 const validarCampoVacio = function(campo, nombreCampo){
   if(campo.trim() === ''){
     return `El campo "${nombreCampo}" no puede estar vacío, por favor ingrese lo solicitado.`;
   }
-  return "";
+  return;
 };
 
-// Validar Campo Telefono.
+// Validar Campo (Telefono).
 const validarTel = function (tel){
   const regularTelefono = /^[0-9]+$/; 
   if(!regularTelefono.test(tel)){
@@ -19,7 +18,7 @@ const validarTel = function (tel){
   return ``;
 };
 
-// Validar Campo Email.
+// Validar Campo (Email).
 const validarMail = function(email){
   const regularEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if(!regularEmail.test(email)){
@@ -28,8 +27,8 @@ const validarMail = function(email){
   return ``;
 };
 
-// Función Para Mostrar Errores.
-const mostrarErrores = function(mensajes) {
+// MENSAJE ERROR
+const msjError = function(mensajes) {
   const divErrores = document.getElementById('mostrarErrores');
   divErrores.innerHTML = ''; 
 
@@ -40,8 +39,8 @@ const mostrarErrores = function(mensajes) {
   });
 };
 
-// Función Para Mostrar "Enviado"
-const mostrarEnviado = function(submit){
+// MENSAJE ENVIADO
+const msjEnviado = function(submit){
   const divEnviado = document.getElementById('mostrarEnviado');
   divEnviado.innerHTML = '';
 
@@ -50,50 +49,93 @@ const mostrarEnviado = function(submit){
   divEnviado.appendChild(p);
 };
 
-// Btn-Contactame
-const btnContacto = document.getElementById('idBtnSubmit');
-// DIV`s 
+// VALIDAR CAMPOS
+function validarCamposVacios (data) {
+  let errors = [];
+  // const {
+  // }
+
+  return errors;
+}
+
+// DECLARACIÓN DE VARIABLES
+const nombreElement = document.getElementById(`nombre`);
+const apellidoElement = document.getElementById(`apellido`);
+const telefonoElement = document.getElementById(`telefono`);
+const emailElement = document.getElementById(`email`);
+const mensajeElement = document.getElementById('mensaje');
+
 const msjSubmit = document.getElementById('mostrarEnviado');
 const submitError = document.getElementById('mostrarErrores');
 
-// Alternar visibilidad de "mostrarEnviado"
-msjSubmit.addEventListener('click', function(){
-  const mostrarEnviado = document.getElementById('mostrarEnviado');
-  const hasClass = msjSubmit.classList.contains('hidden');
-
-  if(hasClass){
-    mostrarEnviado.classList.remove('hidden');
-  } else {
-    mostrarEnviado.classList.add('hidden');
-  };
-})
-
-// Alternar visibilidad de "mostrarErrores"
-submitError.addEventListener('click', function(){
-  const mostrarErrores = document.getElementById('mostrarErrores');
-  const hasClass = submitError.classList.contains('hidden');
-
-  if(hasClass){
-    mostrarErrores.classList.remove('hidden');
-  } else {
-    mostrarErrores.classList.add('hidden');
-  };
-})
+const enviado = `Los datos fueron enviados con éxito.`;
 
 const formulario = document.getElementById('form');
 
+// EVENTO "SUBMIT" FORMULARIO
 formulario.addEventListener('submit', function(event) {
-  // Prevenir que el formulario se envíe y la página se recargue.
   event.preventDefault();
 
-  // Valores Inputs.
-  const nombre = document.getElementById(`nombre`).value;
-  const apellido = document.getElementById(`apellido`).value;
-  const telefono = document.getElementById(`telefono`).value;
-  const email = document.getElementById(`email`).value;
-  const mensaje = document.getElementById('mensaje').value;
+  const data = {
+    nombre : nombreElement.value,
+    apellido : apellidoElement.value,
+    telefono : telefonoElement.value,
+    email : emailElement.value,
+    mensaje : mensajeElement.value
+  }
 
-  // Validar Campo (Telefono - Email).
+  const errores = validarCamposVacios(data);
+  
+  if(errores.length > 0) {
+    // MOSTRAR ERRORES
+    const errors = function(){
+      const mostrarErrores = document.getElementById('mostrarErrores');
+      const hasClass = submitError.classList.contains('hidden');
+
+      if(hasClass){
+        mostrarErrores.classList.remove('hidden');
+      } else {
+        mostrarErrores.classList.add('hidden');
+      };
+    };
+
+    errors();
+    msjError(errores);
+
+    return;
+  };
+
+  // GUARDAR DATOS EN LOCAL STORAGE
+  const datosFormulario = {
+    nombre: nombre,
+    apellido: apellido,
+    telefono: telefono,
+    email: email,
+    mensaje: mensaje
+  };
+
+  // Enviar datos al Local Storage
+  localStorage.setItem('datosFormulario', JSON.stringify(datosFormulario));
+  console.log('Datos Guardados:', datosFormulario);
+
+  // Alternar visibilidad de "mostrarEnviado"
+  const sent = function(){
+    const mostrarEnviado = document.getElementById('mostrarEnviado');
+    const hasClass = msjSubmit.classList.contains('hidden');
+
+    if(hasClass){
+      mostrarEnviado.classList.remove('hidden');
+    } else {
+      mostrarEnviado.classList.add('hidden');
+    };
+  };
+
+  sent();
+  msjEnviado(enviado);
+});
+
+
+
   const validarTelefono = validarTel(telefono);
   const validarEmail = validarMail(email);
 
@@ -104,11 +146,8 @@ formulario.addEventListener('submit', function(event) {
   const emailVacio = validarCampoVacio(email, "Email");
   const mensajeVacio = validarCampoVacio(mensaje, "Mensaje");
 
-  // Almacenar Errores.
-  const errores = [];
 
-  // Mensaje Enviado
-  const enviado = `Los datos fueron enviados con éxito.`;
+  
 
   // Agregar Mensajes de Error al Array.
   if (nombreVacio) errores.push(nombreVacio);
@@ -118,25 +157,3 @@ formulario.addEventListener('submit', function(event) {
   if (mensajeVacio) errores.push(mensajeVacio);
   if (validarTelefono) errores.push(validarTelefono);
   if (validarEmail) errores.push(validarEmail);
-
-  // Mostrar Errores o Continuar con el Envío de Datos y Confirmación de msj Enviado.
-  if (errores.length > 0){
-    mostrarErrores(errores);
-  } else {
-    // Si no hay errores, guardar los datos en localStorage o enviarlos.
-    const datosFormulario = {
-      nombre: nombre,
-      apellido: apellido,
-      telefono: telefono,
-      email: email,
-      mensaje: mensaje
-    };
-    localStorage.setItem('datosFormulario', JSON.stringify(datosFormulario));
-    console.log('Datos guardados:', datosFormulario);
-
-    mostrarEnviado(enviado);
-
-    // Limpiar los mensajes de error si se guardan los datos correctamente.
-    mostrarErrores([]);
-  };
-});

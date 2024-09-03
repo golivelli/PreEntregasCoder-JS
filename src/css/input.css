@@ -344,15 +344,6 @@
   box-shadow: 0 1px 6px 0 #ff362b34, 0 1px 2px -1px #ff362b34;
 }
 
-.lable {
-  line-height: 20px;
-  font-size: 17px;
-  color: #FF342B;
-  font-family: "DM Sans", sans-serif;
-  font-weight: 600;
-  font-style: italic;
-}
-
 .bottom-delete:hover .svg-icon {
   animation: spin 2s linear infinite;
 }
@@ -374,6 +365,18 @@
 }
 
 #mostrarErrores{
+  color: #FF342B;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+#erroresCotizacion{
+  background-color: #ff362b34;
+  border:#FF342B 2px solid;
+}
+
+#erroresCotizacion{
   color: #FF342B;
   font-family: "DM Sans", sans-serif;
   font-weight: 600;

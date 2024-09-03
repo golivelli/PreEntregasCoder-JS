@@ -1,5 +1,4 @@
-// PRE-ENTREGA 2
-// COTIZADOR DE SEGUROS
+// PRE-ENTREGA 3
 
 // COTIZADOR
 const tipoDeSeguros = [
@@ -28,6 +27,21 @@ const aseguradoras = [
   },
 ];
 
+const coberturas = [
+  {
+    id: 0,
+    name: "Responsabilidad Civil",
+  },
+  {
+    id: 1,
+    name: "Tercero Completo",
+  },
+  {
+    id: 2,
+    name: "Todo Riesgo",
+  },
+];
+
 const planes = [
   // Planes de La Holando (aseguradora_id: 0)
   {
@@ -36,7 +50,7 @@ const planes = [
     tipo_id: 0, // Identificar Tipo de Seguro en el Registro
     tipo: "Basico",
     precio: 8200,
-    cobertura: "Responsabilidad Civil",
+    cobertura: 0,
   },
   {
     id: 1,
@@ -44,7 +58,7 @@ const planes = [
     tipo_id: 0,
     tipo: "Intermedio",
     precio: 15000,
-    cobertura: "Tercero Completo",
+    cobertura: 1,
   },
   {
     id: 2,
@@ -52,7 +66,7 @@ const planes = [
     tipo_id: 0,
     tipo: "Completo",
     precio: 22150,
-    cobertura: "Todo Riesgo",
+    cobertura: 2,
   },
   {
     id: 3,
@@ -60,7 +74,7 @@ const planes = [
     tipo_id: 1,
     tipo: "Basico",
     precio: 4700,
-    cobertura: "Responsabilidad Civil",
+    cobertura: 0,
   },
   {
     id: 4,
@@ -68,7 +82,7 @@ const planes = [
     tipo_id: 1,
     tipo: "Intermedio",
     precio: 8950,
-    cobertura: "Tercero Completo",
+    cobertura: 1,
   },
   {
     id: 5,
@@ -76,7 +90,7 @@ const planes = [
     tipo_id: 1,
     tipo: "Completo",
     precio: 11450,
-    cobertura: "Todo Riesgo",
+    cobertura: 2,
   },
 
   // Planes de El Norte Seguros (aseguradora_id: 1)
@@ -86,7 +100,7 @@ const planes = [
     tipo_id: 0,
     tipo: "Basico",
     precio: 7800,
-    cobertura: "Responsabilidad Civil",
+    cobertura: 0,
   },
   {
     id: 7,
@@ -94,7 +108,7 @@ const planes = [
     tipo_id: 0,
     tipo: "Intermedio",
     precio: 16000,
-    cobertura: "Tercero Completo",
+    cobertura: 1,
   },
   {
     id: 8,
@@ -102,7 +116,7 @@ const planes = [
     tipo_id: 0,
     tipo: "Completo",
     precio: 19900,
-    cobertura: "Todo Riesgo",
+    cobertura: 2,
   },
   {
     id: 9,
@@ -110,7 +124,7 @@ const planes = [
     tipo_id: 1,
     tipo: "Basico",
     precio: 5000,
-    cobertura: "Responsabilidad Civil",
+    cobertura: 0,
   },
   {
     id: 10,
@@ -118,7 +132,7 @@ const planes = [
     tipo_id: 1,
     tipo: "Intermedio",
     precio: 9200,
-    cobertura: "Tercero Completo",
+    cobertura: 1,
   },
   {
     id: 11,
@@ -126,7 +140,7 @@ const planes = [
     tipo_id: 1,
     tipo: "Completo",
     precio: 10000,
-    cobertura: "Todo Riesgo",
+    cobertura: 2,
   },
 
   // Planes de Sancor Seguros (aseguradora_id: 2)
@@ -135,7 +149,7 @@ const planes = [
     tipo_id: 0,
     tipo: "Basico",
     precio: 8000,
-    cobertura: "Responsabilidad Civil",
+    cobertura: 0,
     aseguradora_id: 2,
   },
   {
@@ -143,7 +157,7 @@ const planes = [
     tipo_id: 0,
     tipo: "Intermedio",
     precio: 15670,
-    cobertura: "Tercero Completo",
+    cobertura: 1,
     aseguradora_id: 2,
   },
   {
@@ -151,7 +165,7 @@ const planes = [
     tipo_id: 0,
     tipo: "Completo",
     precio: 21700,
-    cobertura: "Todo Riesgo",
+    cobertura: 2,
     aseguradora_id: 2,
   },
   {
@@ -159,7 +173,7 @@ const planes = [
     tipo_id: 1, // moto
     tipo: "Basico",
     precio: 5200,
-    cobertura: "Responsabilidad Civil",
+    cobertura: 0,
     aseguradora_id: 2,
   },
   {
@@ -167,7 +181,7 @@ const planes = [
     tipo_id: 1,
     tipo: "Intermedio",
     precio: 7550,
-    cobertura: "Tercero Completo",
+    cobertura: 1,
     aseguradora_id: 2,
   },
   {
@@ -175,172 +189,188 @@ const planes = [
     tipo_id: 1,
     tipo: "Completo",
     precio: 14600,
-    cobertura: "Todo Riesgo",
+    cobertura: 2,
     aseguradora_id: 2,
   },
 ];
 
-const cotizar = () => {
-  // Función para "Elegir el tipo de Seguro (Auto - Moto)".
-  function elegirSeguro(tipoDeSeguro) {
-    let tipoSeg = tipoDeSeguro;
-    // Validación de la entrada del usuario.
-    while (
-      tipoSeg === "" ||
-      tipoSeg === null ||
-      (tipoSeg !== "auto" && tipoSeg !== "moto" && tipoSeg !== "cancelar")
-    ) {
-      console.log("Ingreso no válido, por favor ingrese una opción válida (Auto - Moto, Cancelar).");
-      tipoSeg = prompt("Si desea realizar una cotización, por favor ingrese una opción (Auto - Moto, Cancelar).").toLowerCase();
-    }
+// DECLRACIÓN DE VARIABLES
+const tipoSeguroElement = document.getElementById("tipoSeguro");
+const aseguradoraElement = document.getElementById("selectAseguradora");
+const coberturaElement = document.getElementById("tipoCobertura");
+const precioElement = document.getElementById("precio");
 
-    if (tipoSeg === "cancelar") {
-      console.log("El usuario canceló la entrada.");
-      return;
-    }
+const mostrarErrores = document.getElementById("erroresCotizacion");
+const cotizarSeguro = document.getElementById("cotizarSeguro");
+var tablaBody = document.getElementById("tablaBody");
 
-    mostrarCompanias(tipoSeg);
-  }
+const divError = document.getElementById("erroresCotizacion");
 
-  // Función para "Mostrar Compañías".
-  function mostrarCompanias(tipoDeSeguro) {
-    console.log(`Aseguradoras disponibles:`);
+// MENSAJE ERROR
+const msjErrorCotizacion = function (mensajes) {
+  const divErrorCotizacion = document.getElementById("erroresCotizacion");
+  divErrorCotizacion.innerHTML = "";
 
-    const tipoSeg = tipoDeSeguros.find((seguro) => seguro.name.toLowerCase() == tipoDeSeguro);
-
-    if (!tipoSeg) {
-      console.log("No existe el tipo de seguro: " + tipoDeSeguro);
-      return;
-    }
-
-    aseguradoras.forEach((aseguradora) => {
-      console.log(`Aseguradora: ${aseguradora.name}`);
-
-      const asegId = aseguradora.id;
-      const planesAseguradora = planes.filter(
-        (plan) => plan.aseguradora_id == asegId && plan.tipo_id == tipoSeg.id
-      );
-
-      if (planesAseguradora.length === 0) {
-        console.log("No hay planes disponibles para esta aseguradora.");
-        return;
-      }
-
-      planesAseguradora.forEach((plan) => {
-        console.log(
-          `Tipo de Seguro: ${tipoDeSeguro}, Plan: ${plan.tipo}, Precio: $${plan.precio}, Cobertura: ${plan.cobertura}`
-        );
-      });
-
-      console.log("\n");
-    });
-
-    filtrarPorPrecio(tipoDeSeguro);
-  }
-
-  // Función para "Filtar por Precio".
-  function filtrarPorPrecio(tipoDeSeguro) {
-    let continuarFiltrado = prompt(
-      "¿Desea filtrar planes por precio? (Si - No)"
-    ).toLowerCase();
-
-    while (
-      continuarFiltrado === "" ||
-      (continuarFiltrado !== "no" &&
-        continuarFiltrado !== "si" &&
-        continuarFiltrado !== "cancelar")
-    ) {
-      console.log("Por favor, ingresa una opción valida para continuar.");
-      continuarFiltrado = prompt(
-        "¿Desea filtrar planes por precio? (Si - No)"
-      ).toLowerCase();
-    }
-
-    if (continuarFiltrado === "no" || continuarFiltrado === "cancelar") {
-      console.log("El usuario canceló el filtrado por precio.");
-      buscarPorCobertura(tipoDeSeguro);
-      return;
-    } else {
-      let precioMin = parseInt(prompt("Ingrese el precio mínimo a cotizar:"));
-      let precioMax = parseInt(prompt("Ingrese el precio máximo a cotizar:"));
-
-      // Validación de la entrada del usuario.
-      while (precioMin <= 0 || precioMax <= 0 || precioMax < precioMin) {
-        console.log(
-          "Por favor, ingrese los montos solicitados de manera correcta."
-        );
-        precioMin = parseInt(prompt("Ingrese el precio mínimo a cotizar:"));
-        precioMax = parseInt(prompt("Ingrese el precio máximo a cotizar:"));
-      }
-
-      // Filtrar por precio inidicado.
-      const planesFiltrados = planes.filter((plan) => plan.precio >= precioMin && plan.precio <= precioMax);
-
-      if (planesFiltrados.length > 0) {
-        planesFiltrados.forEach((plan) => {
-          const aseg = aseguradoras[plan.aseguradora_id]?.name ?? "Aseguradora no encontrada.";
-          console.log(`Aseguradora: ${aseg}, Plan: ${plan.tipo}, Precio: $${plan.precio}, Cobertura: ${plan.cobertura}`);
-        });
-        console.log("\n");
-      } else {
-        console.log("No hay en planes en ese rango de precio.");
-      }
-    }
-    buscarPorCobertura(tipoDeSeguro);
-  }
-
-  // Función para "Buscar por Cobertura".
-  function buscarPorCobertura() {
-    let continuarBusqueda = prompt("¿Desea buscar una cobertura específica? (Sí - No)").toLowerCase();
-
-    while (
-      continuarBusqueda === "" ||
-      (continuarBusqueda !== "no" && continuarBusqueda !== "si")
-    ) {
-      console.log("Por favor, ingresa una opción valida para continuar.");
-      continuarBusqueda = prompt("¿Desea buscar una cobertura específica? (Si - No)").toLowerCase();
-    }
-
-    if (continuarBusqueda === "no") {
-      console.log("El usuario canceló el filtrado por coberturta.");
-      return;
-    } else {
-      let coberturaABuscar = prompt("¿Sobre que cobertura deseas obtener una cotización? (Responsabilidad Civil - Tercero Completo - Todo Riesgo)").toLowerCase();
-
-      while (
-        coberturaABuscar !== "responsabilidad civil" &&
-        coberturaABuscar !== "tercero completo" &&
-        coberturaABuscar !== "todo riesgo" &&
-        coberturaABuscar !== "cancelar"
-      ) {
-        console.log("Ingreso no válido, por favor ingrese una opción válida (Responsabilidad Civil - Tercero Completo - Todo Riesgo, Cancelar).");
-        coberturaABuscar = prompt("¿Sobre que cobertura deseas obtener una cotización? (Responsabilidad Civil - Tercero Completo - Todo Riesgo, Cancelar)").toLowerCase();
-      }
-
-      if (coberturaABuscar === "cancelar") {
-        console.log("El usuario canceló la búsqueda de cobertura.");
-        return;
-      }
-
-      // Filtrar por coberturas.
-      const coberturasFiltradas = planes.filter((plan) => plan.cobertura.toLowerCase() == coberturaABuscar);
-
-      if (coberturasFiltradas.length > 0) {
-        coberturasFiltradas.forEach((plan) => {
-          const cobertura = plan.cobertura ?? "Cobertura no encontrada.";
-          console.log(`Plan: ${plan.tipo}, Cobertura: ${cobertura}, Precio: $${plan.precio}`);
-        });
-        console.log("\n");
-      } else {
-        console.log("No existe esa cobertura.");
-      }
-    }
-  }
-
-  let tipoDeSeguro = prompt("Ingresa el tipo de seguro que deseas cotizar (Auto - Moto, Cancelar).").toLowerCase();
-  elegirSeguro(tipoDeSeguro);
+  mensajes.forEach(function (mensaje) {
+    const p = document.createElement("p");
+    p.textContent = mensaje;
+    divErrorCotizacion.appendChild(p);
+  });
 };
 
-const btn = document.getElementById("cotizar");
+// VALIDAR CAMPOS
+function validarCampos(data) {
+  let errors = [];
+  const { tipo_seguro, aseguradora, cobertura, precio } = data;
 
-btn.addEventListener("click", () => cotizar());
+  if (
+    tipo_seguro === null ||
+    tipo_seguro === undefined ||
+    !tipoDeSeguros.find((tipo) => tipo.id == parseInt(tipo_seguro))
+  ) {
+    errors.push(
+      "El campo tipo seguro es requerido y debe ser un tipo de seguro valido."
+    );
+  }
+
+  if (
+    aseguradora &&
+    !aseguradoras.find((aseg) => aseg.id == parseInt(aseguradora))
+  ) {
+    errors.push("La aseguradora seleccionada no es valida.");
+  }
+
+  if (cobertura && !coberturas.find((cob) => cob.id == parseInt(cobertura))) {
+    errors.push("La cobertura seleccionada no es valida.");
+  }
+
+  if (precio && isNaN(precio) && precio <= 0) {
+    errors.push("Si quieres filtrar por precio debes poner un precio valido.");
+  }
+
+  return errors;
+}
+
+//MOSTRAR TABLA
+function mostrarTabla(data) {
+  let tablaContent = "";
+  const { tipo_seguro, aseguradora, cobertura, precio } = data;
+
+  let plans = planes.filter((plan) => plan.tipo_id == parseInt(tipo_seguro));
+
+  if (aseguradora) {
+    plans = plans.filter(
+      (plan) => plan.aseguradora_id == parseInt(aseguradora)
+    );
+  }
+
+  if (cobertura) {
+    plans = plans.filter((plan) => plan.cobertura == parseInt(cobertura));
+  }
+
+  if (precio) {
+    plans = plans.filter((plan) => plan.precio <= parseInt(precio));
+  }
+
+  if (plans.length === 0) {
+    tablaContent += `
+      <tr>
+        <td colspan="6" class="text-center p-2">No encontramos planes</td>
+      </tr> 
+    `;
+  }
+
+  plans.forEach((plan) => {
+    const tipoSeg = tipoDeSeguros.find(
+      (tipo) => tipo.id == parseInt(plan.tipo_id)
+    );
+    const aseg = aseguradoras.find(
+      (asegu) => asegu.id == parseInt(plan.aseguradora_id)
+    );
+    const cob = coberturas.find(
+      (cober) => cober.id == parseInt(plan.cobertura)
+    );
+
+    tablaContent += `
+      <tr>
+        <td class="p-5 dm-sans-600-normal text-lg text-shadow-2 text-center">${
+          plan.id + 1
+        }</td>
+        <td class="p-5 dm-sans-600-normal text-lg text-shadow-2 text-center">${
+          plan.tipo
+        }</td>
+        <td class="p-5 dm-sans-600-normal text-lg text-shadow-2 text-center">${
+          tipoSeg?.name ?? "No aplica."
+        }</td>
+        <td class="p-5 dm-sans-600-normal text-lg text-shadow-2 text-center">${
+          aseg?.name ?? "No aplica."
+        }</td>
+        <td class="p-5 dm-sans-600-normal text-lg text-shadow-2 text-center">${
+          cob?.name ?? "No aplica."
+        }</td>
+        <td class="p-5 dm-sans-600-normal text-lg text-shadow-2 text-center">$ ${
+          plan.precio
+        } ARS</td>
+      </tr>
+    `;
+  });
+
+  tablaBody.innerHTML = tablaContent;
+}
+
+// ASIGNAR OPCIONES
+const asignarOptions = () => {
+  // OPCIONES TIPO DE SEGURO
+  let optionsTipoSeguro = `<option class="text-center dm-sans-normal" value="">Selecciona un tipo de seguro</option>`;
+
+  tipoDeSeguros.forEach((tipo) => {
+    optionsTipoSeguro += `<option class="text-center dm-sans-normal" value="${tipo.id}">${tipo.name}</option>`;
+  });
+
+  // OPCIONES ASEGURADORAS
+  let optionsAseguradoras = `<option class="text-center dm-sans-normal" value="">Selecciona una aseguradora</option>`;
+
+  aseguradoras.forEach((aseg) => {
+    optionsAseguradoras += `<option class="text-center dm-sans-normal" value="${aseg.id}">${aseg.name}</option>`;
+  });
+
+  // OPCIONES COBERTURAS
+  let optionsCobertura = `<option class="text-center dm-sans-normal" value="">Selecciona una cobertura</option>`;
+
+  coberturas.forEach((cob) => {
+    optionsCobertura += `<option class="text-center dm-sans-normal" value="${cob.id}">${cob.name}</option>`;
+  });
+
+  tipoSeguroElement.innerHTML = optionsTipoSeguro;
+  aseguradoraElement.innerHTML = optionsAseguradoras;
+  coberturaElement.innerHTML = optionsCobertura;
+};
+
+document.addEventListener("DOMContentLoaded", function () {
+  asignarOptions();
+
+  cotizarSeguro.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const data = {
+      tipo_seguro: tipoSeguroElement.value,
+      aseguradora: aseguradoraElement.value,
+      cobertura: coberturaElement.value,
+      precio: precioElement.value,
+    };
+
+    const errores = validarCampos(data);
+
+    if (errores.length > 0) {
+      mostrarErrores.classList.remove("hidden");
+      msjErrorCotizacion(errores);
+
+      return;
+    } else {
+      mostrarErrores.classList.add("hidden");
+    }
+
+    // MOSTRAR TABLA
+    mostrarTabla(data);
+  });
+});
