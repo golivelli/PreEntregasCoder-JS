@@ -145,7 +145,7 @@ const planes = [
 
   // Planes de Sancor Seguros (aseguradora_id: 2)
   {
-    id: 0,
+    id: 12,
     tipo_id: 0,
     tipo: "Basico",
     precio: 8000,
@@ -153,7 +153,7 @@ const planes = [
     aseguradora_id: 2,
   },
   {
-    id: 1,
+    id: 13,
     tipo_id: 0,
     tipo: "Intermedio",
     precio: 15670,
@@ -161,7 +161,7 @@ const planes = [
     aseguradora_id: 2,
   },
   {
-    id: 2,
+    id: 14,
     tipo_id: 0,
     tipo: "Completo",
     precio: 21700,
@@ -169,7 +169,7 @@ const planes = [
     aseguradora_id: 2,
   },
   {
-    id: 3, // esta es la id para identificar este plan
+    id: 15, // esta es la id para identificar este plan
     tipo_id: 1, // moto
     tipo: "Basico",
     precio: 5200,
@@ -177,7 +177,7 @@ const planes = [
     aseguradora_id: 2,
   },
   {
-    id: 4,
+    id: 16,
     tipo_id: 1,
     tipo: "Intermedio",
     precio: 7550,
@@ -185,7 +185,7 @@ const planes = [
     aseguradora_id: 2,
   },
   {
-    id: 5,
+    id: 17,
     tipo_id: 1,
     tipo: "Completo",
     precio: 14600,
@@ -223,6 +223,7 @@ function validarCampos(data) {
   let errors = [];
   const { tipo_seguro, aseguradora, cobertura, precio } = data;
 
+  // VALIDAR CAMPO "TIPO DE SEGURO"
   if (
     tipo_seguro === null ||
     tipo_seguro === undefined ||
@@ -233,6 +234,7 @@ function validarCampos(data) {
     );
   }
 
+  // VALIDAR CAMPO "ASEGURADORA"
   if (
     aseguradora &&
     !aseguradoras.find((aseg) => aseg.id == parseInt(aseguradora))
@@ -240,12 +242,16 @@ function validarCampos(data) {
     errors.push("La aseguradora seleccionada no es valida.");
   }
 
+  // VALIDAR CAMPO "COBERTURA"
   if (cobertura && !coberturas.find((cob) => cob.id == parseInt(cobertura))) {
     errors.push("La cobertura seleccionada no es valida.");
   }
 
+  // VALIDAR CAMPO "PRECIO"
   if (precio && isNaN(precio) && precio <= 0) {
-    errors.push("Si quieres filtrar por precio debes poner un precio valido.");
+    errors.push(
+      "Si quieres filtrar por precio debes poner un precio valido (Mayor a 0)."
+    );
   }
 
   return errors;
@@ -362,6 +368,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const errores = validarCampos(data);
 
     if (errores.length > 0) {
+      // MOSTRAR ERRORES
       mostrarErrores.classList.remove("hidden");
       msjErrorCotizacion(errores);
 
@@ -371,6 +378,21 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // MOSTRAR TABLA
-    mostrarTabla(data);
+    const cotizacion = function () {
+      const tablaCotizacion = document.getElementById('tablaCotizacion');
+      const hasClass = tablaCotizacion.classList.contains("hidden");
+
+      if (hasClass) {
+        // MOSTRAR TABLA
+        tablaCotizacion.classList.remove("hidden");
+        mostrarTabla(data);
+        return;
+      } else {
+        tablaCotizacion.classList.add("hidden");
+      }
+    };
+
+    cotizacion();
   });
+
 });
