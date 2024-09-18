@@ -1,0 +1,146 @@
+[
+  {
+    "id": 0, 
+    "aseguradora_id": 0, 
+    "tipo_id": 0, 
+    "tipo": "Basico",
+    "precio": 8200,
+    "cobertura": 0
+  },
+  {
+    "id": 1,
+    "aseguradora_id": 0,
+    "tipo_id": 0,
+    "tipo": "Intermedio",
+    "precio": 15000,
+    "cobertura": 1
+  },
+  {
+    "id": 2,
+    "aseguradora_id": 0,
+    "tipo_id": 0,
+    "tipo": "Completo",
+    "precio": 22150,
+    "cobertura": 2
+  },
+  {
+    "id": 3,
+    "aseguradora_id": 0,
+    "tipo_id": 1,
+    "tipo": "Basico",
+    "precio": 4700,
+    "cobertura": 0
+  },
+  {
+    "id": 4,
+    "aseguradora_id": 0,
+    "tipo_id": 1,
+    "tipo": "Intermedio",
+    "precio": 8950,
+    "cobertura": 1
+  },
+  {
+    "id": 5,
+    "aseguradora_id": 0,
+    "tipo_id": 1,
+    "tipo": "Completo",
+    "precio": 11450,
+    "cobertura": 2
+  },
+  {
+    "id": 6,
+    "aseguradora_id": 1,
+    "tipo_id": 0,
+    "tipo": "Basico",
+    "precio": 7800,
+    "cobertura": 0
+  },
+  {
+    "id": 7,
+    "aseguradora_id": 1,
+    "tipo_id": 0,
+    "tipo": "Intermedio",
+    "precio": 16000,
+    "cobertura": 1
+  },
+  {
+    "id": 8,
+    "aseguradora_id": 1,
+    "tipo_id": 0,
+    "tipo": "Completo",
+    "precio": 19900,
+    "cobertura": 2
+  },
+  {
+    "id": 9,
+    "aseguradora_id": 1,
+    "tipo_id": 1,
+    "tipo": "Basico",
+    "precio": 5000,
+    "cobertura": 0
+  },
+  {
+    "id": 10,
+    "aseguradora_id": 1,
+    "tipo_id": 1,
+    "tipo": "Intermedio",
+    "precio": 9200,
+    "cobertura": 1
+  },
+  {
+    "id": 11,
+    "aseguradora_id": 1,
+    "tipo_id": 1,
+    "tipo": "Completo",
+    "precio": 10000,
+    "cobertura": 2
+  },
+  {
+    "id": 12,
+    "tipo_id": 0,
+    "tipo": "Basico",
+    "precio": 8000,
+    "cobertura": 0,
+    "aseguradora_id": 2
+  },
+  {
+    "id": 13,
+    "tipo_id": 0,
+    "tipo": "Intermedio",
+    "precio": 15670,
+    "cobertura": 1,
+    "aseguradora_id": 2
+  },
+  {
+    "id": 14,
+    "tipo_id": 0,
+    "tipo": "Completo",
+    "precio": 21700,
+    "cobertura": 2,
+    "aseguradora_id": 2
+  },
+  {
+    "id": 15, 
+    "tipo_id": 1,
+    "tipo": "Basico",
+    "precio": 5200,
+    "cobertura": 0,
+    "aseguradora_id": 2
+  },
+  {
+    "id": 16,
+    "tipo_id": 1,
+    "tipo": "Intermedio",
+    "precio": 7550,
+    "cobertura": 1,
+    "aseguradora_id": 2
+  },
+  {
+    "id": 17,
+    "tipo_id": 1,
+    "tipo": "Completo",
+    "precio": 14600,
+    "cobertura": 2,
+    "aseguradora_id": 2
+  }
+]

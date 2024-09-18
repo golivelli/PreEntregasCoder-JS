@@ -1,6 +1,6 @@
 // PRE-ENTREGA 3
-
 // FORMULARIO
+
 // DECLARACIÓN DE VARIABLES
 const nombreElement = document.getElementById(`nombre`);
 const apellidoElement = document.getElementById(`apellido`);
@@ -19,7 +19,6 @@ const formulario = document.getElementById("form");
 const msjError = function (mensajes) {
   const divErrores = document.getElementById("mostrarErrores");
   divErrores.innerHTML = "";
-  console.log(mensajes);
 
   mensajes.forEach(function (mensaje) {
     const p = document.createElement("p");
@@ -76,46 +75,85 @@ function validarCampos(data) {
   return errores;
 }
 
+// MANEJO DE PROMESA
+function contacUser (data) {
+  return new Promise ((resolve, reject) => {
+    const errores = validarCampos(data);
+
+    if (errores.length > 0) {
+      return reject(errores);
+    }
+
+    let dataUser = JSON.parse(localStorage.getItem("dataUser") ?? "[]"); 
+
+    dataUser.push({ ...data, id : dataUser.length + 1 });
+
+    // ENVIAR DATOS A LOCAL STORAGE
+    localStorage.setItem("dataUser", JSON.stringify(dataUser));
+    console.log("Datos Guardados:", dataUser);
+
+    resolve({
+      status : 201,
+      user : { ...data, id : dataUser.length + 1 },
+      message : "Datos enviados correctamente.",
+    });
+  });
+}
+
 // EVENTO "SUBMIT" FORMULARIO
-formulario.addEventListener("submit", function (event) {
+form.addEventListener("submit", async function (event) {
   event.preventDefault();
 
-  const data = {
-    nombre: nombreElement.value,
-    apellido: apellidoElement.value,
-    telefono: telefonoElement.value,
-    email: emailElement.value,
-    mensaje: mensajeElement.value,
-  };
+  // GUARDAR DATOS
+  const data = Object.fromEntries((new FormData(form)).entries());
+
+  const {
+    nombre,
+    apellido, 
+    telefono, 
+    email,
+    mensaje
+  } = data;
+
+  try{
+    const response = await contacUser(data);
+
+    if (response.error){
+      throw response;
+    }
+
+    Swal.fire({
+      title: 'Datos enviados con éxito.',
+      text: 'Has completo los campos solicitados con éxito.',
+      icon: 'success',
+      confirmButtonText: 'Aceptar'
+    });
+
+    console.log(response);
+  } catch (error){
+    Swal.fire({
+      icon: "error",
+      title: "Ups...",
+      text: "¡Algo salió mal! Complete el formulario correctamente.",
+    });
+
+    console.log(error);
+  }
 
   const errores = validarCampos(data);
 
+  // MOSTRAR "ERRORES"
   if (errores.length > 0) {
     // MOSTRAR ERRORES
     submitError.classList.remove("hidden");
-    msjError(errores);
+    return msjError(errores);
 
-    return;
   } else {
     submitError.classList.add("hidden");
   }
 
-  // GUARDAR DATOS
-  const datosFormulario = {
-    nombre: nombre.value,
-    apellido: apellido.value,
-    telefono: telefono.value,
-    email: email.value,
-    mensaje: mensaje.value,
-  };
-
-  // ENVIAR DATOS A LOCAL STORAGE
-  localStorage.setItem("datosFormulario", JSON.stringify(datosFormulario));
-  console.log("Datos Guardados:", datosFormulario);
-
   // MOSTRAR "FORMULARIO ENVIADO"
   const sent = function () {
-    const msjSubmit = document.getElementById("mostrarEnviado");
     const hasClass = msjSubmit.classList.contains("hidden");
 
     if (hasClass) {
@@ -128,3 +166,4 @@ formulario.addEventListener("submit", function (event) {
   sent();
   formEnviado(enviado);
 });
+

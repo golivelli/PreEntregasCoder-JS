@@ -1,198 +1,5 @@
 // PRE-ENTREGA 3
-
 // COTIZADOR
-const tipoDeSeguros = [
-  {
-    id: 0, // ID para identificar el plan.
-    name: "Auto",
-  },
-  {
-    id: 1,
-    name: "Moto",
-  },
-];
-
-const aseguradoras = [
-  {
-    id: 0,
-    name: "La Holando Seguros",
-  },
-  {
-    id: 1,
-    name: "El Norte Seguros",
-  },
-  {
-    id: 2,
-    name: "Sancor Seguros",
-  },
-];
-
-const coberturas = [
-  {
-    id: 0,
-    name: "Responsabilidad Civil",
-  },
-  {
-    id: 1,
-    name: "Tercero Completo",
-  },
-  {
-    id: 2,
-    name: "Todo Riesgo",
-  },
-];
-
-const planes = [
-  // Planes de La Holando (aseguradora_id: 0)
-  {
-    id: 0, // Identificar Registro
-    aseguradora_id: 0, // Identificar Aseguradora en el Registro
-    tipo_id: 0, // Identificar Tipo de Seguro en el Registro
-    tipo: "Basico",
-    precio: 8200,
-    cobertura: 0,
-  },
-  {
-    id: 1,
-    aseguradora_id: 0,
-    tipo_id: 0,
-    tipo: "Intermedio",
-    precio: 15000,
-    cobertura: 1,
-  },
-  {
-    id: 2,
-    aseguradora_id: 0,
-    tipo_id: 0,
-    tipo: "Completo",
-    precio: 22150,
-    cobertura: 2,
-  },
-  {
-    id: 3,
-    aseguradora_id: 0,
-    tipo_id: 1,
-    tipo: "Basico",
-    precio: 4700,
-    cobertura: 0,
-  },
-  {
-    id: 4,
-    aseguradora_id: 0,
-    tipo_id: 1,
-    tipo: "Intermedio",
-    precio: 8950,
-    cobertura: 1,
-  },
-  {
-    id: 5,
-    aseguradora_id: 0,
-    tipo_id: 1,
-    tipo: "Completo",
-    precio: 11450,
-    cobertura: 2,
-  },
-
-  // Planes de El Norte Seguros (aseguradora_id: 1)
-  {
-    id: 6,
-    aseguradora_id: 1,
-    tipo_id: 0,
-    tipo: "Basico",
-    precio: 7800,
-    cobertura: 0,
-  },
-  {
-    id: 7,
-    aseguradora_id: 1,
-    tipo_id: 0,
-    tipo: "Intermedio",
-    precio: 16000,
-    cobertura: 1,
-  },
-  {
-    id: 8,
-    aseguradora_id: 1,
-    tipo_id: 0,
-    tipo: "Completo",
-    precio: 19900,
-    cobertura: 2,
-  },
-  {
-    id: 9,
-    aseguradora_id: 1,
-    tipo_id: 1,
-    tipo: "Basico",
-    precio: 5000,
-    cobertura: 0,
-  },
-  {
-    id: 10,
-    aseguradora_id: 1,
-    tipo_id: 1,
-    tipo: "Intermedio",
-    precio: 9200,
-    cobertura: 1,
-  },
-  {
-    id: 11,
-    aseguradora_id: 1,
-    tipo_id: 1,
-    tipo: "Completo",
-    precio: 10000,
-    cobertura: 2,
-  },
-
-  // Planes de Sancor Seguros (aseguradora_id: 2)
-  {
-    id: 12,
-    tipo_id: 0,
-    tipo: "Basico",
-    precio: 8000,
-    cobertura: 0,
-    aseguradora_id: 2,
-  },
-  {
-    id: 13,
-    tipo_id: 0,
-    tipo: "Intermedio",
-    precio: 15670,
-    cobertura: 1,
-    aseguradora_id: 2,
-  },
-  {
-    id: 14,
-    tipo_id: 0,
-    tipo: "Completo",
-    precio: 21700,
-    cobertura: 2,
-    aseguradora_id: 2,
-  },
-  {
-    id: 15, // esta es la id para identificar este plan
-    tipo_id: 1, // moto
-    tipo: "Basico",
-    precio: 5200,
-    cobertura: 0,
-    aseguradora_id: 2,
-  },
-  {
-    id: 16,
-    tipo_id: 1,
-    tipo: "Intermedio",
-    precio: 7550,
-    cobertura: 1,
-    aseguradora_id: 2,
-  },
-  {
-    id: 17,
-    tipo_id: 1,
-    tipo: "Completo",
-    precio: 14600,
-    cobertura: 2,
-    aseguradora_id: 2,
-  },
-];
 
 // DECLRACIÓN DE VARIABLES
 const tipoSeguroElement = document.getElementById("tipoSeguro");
@@ -205,6 +12,11 @@ const cotizarSeguro = document.getElementById("cotizarSeguro");
 var tablaBody = document.getElementById("tablaBody");
 
 const divError = document.getElementById("erroresCotizacion");
+
+let tipoDeSeguros = [];
+let aseguradoras = [];
+let coberturas = [];
+let planes = [];
 
 // MENSAJE ERROR
 const msjErrorCotizacion = function (mensajes) {
@@ -306,7 +118,7 @@ function mostrarTabla(data) {
           plan.tipo
         }</td>
         <td class="p-5 dm-sans-600-normal text-lg text-shadow-2 text-center">${
-          tipoSeg?.name ?? "No aplica."
+          tipoSeg?.type ?? "No aplica."
         }</td>
         <td class="p-5 dm-sans-600-normal text-lg text-shadow-2 text-center">${
           aseg?.name ?? "No aplica."
@@ -324,13 +136,35 @@ function mostrarTabla(data) {
   tablaBody.innerHTML = tablaContent;
 }
 
+// CARGAR DATOS
+const cargarDatos = () => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const responseSeguros = await fetch('../json/tiposeguro.json');
+      const responsePlanes = await fetch('../json/planes.json');
+      const responseCoberturas = await fetch ('../json/coberturas.json');
+      const responseAseguradoras = await fetch ('../json/aseguradoras.json');
+  
+      tipoDeSeguros = await responseSeguros.json();
+      planes = await responsePlanes.json();
+      coberturas = await responseCoberturas.json();
+      aseguradoras = await responseAseguradoras.json();
+      
+      resolve(asignarOptions());
+    } catch (error) {
+      console.error('Error al cargar los datos: ', error);
+      reject(error);
+    };
+  });
+};
+
 // ASIGNAR OPCIONES
 const asignarOptions = () => {
   // OPCIONES TIPO DE SEGURO
   let optionsTipoSeguro = `<option class="text-center dm-sans-normal" value="">Selecciona un tipo de seguro</option>`;
 
   tipoDeSeguros.forEach((tipo) => {
-    optionsTipoSeguro += `<option class="text-center dm-sans-normal" value="${tipo.id}">${tipo.name}</option>`;
+    optionsTipoSeguro += `<option class="text-center dm-sans-normal" value="${tipo.id}">${tipo.type}</option>`;
   });
 
   // OPCIONES ASEGURADORAS
@@ -354,6 +188,7 @@ const asignarOptions = () => {
 
 document.addEventListener("DOMContentLoaded", function () {
   asignarOptions();
+  cargarDatos();
 
   cotizarSeguro.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -394,5 +229,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
     cotizacion();
   });
-
 });
+
