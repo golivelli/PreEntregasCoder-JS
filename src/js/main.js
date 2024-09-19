@@ -18,18 +18,6 @@ let aseguradoras = [];
 let coberturas = [];
 let planes = [];
 
-// MENSAJE ERROR
-const msjErrorCotizacion = function (mensajes) {
-  const divErrorCotizacion = document.getElementById("erroresCotizacion");
-  divErrorCotizacion.innerHTML = "";
-
-  mensajes.forEach(function (mensaje) {
-    const p = document.createElement("p");
-    p.textContent = mensaje;
-    divErrorCotizacion.appendChild(p);
-  });
-};
-
 // VALIDAR CAMPOS
 function validarCampos(data) {
   let errors = [];
@@ -68,6 +56,68 @@ function validarCampos(data) {
 
   return errors;
 }
+
+// MENSAJE ERROR
+const msjErrorCotizacion = function (mensajes) {
+  const divErrorCotizacion = document.getElementById("erroresCotizacion");
+  divErrorCotizacion.innerHTML = "";
+
+  mensajes.forEach(function (mensaje) {
+    const p = document.createElement("p");
+    p.textContent = mensaje;
+    divErrorCotizacion.appendChild(p);
+  });
+};
+
+// CARGAR DATOS
+const cargarDatos = () => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const responseSeguros = await fetch('../json/tiposeguro.json');
+      const responsePlanes = await fetch('../json/planes.json');
+      const responseCoberturas = await fetch ('../json/coberturas.json');
+      const responseAseguradoras = await fetch ('../json/aseguradoras.json');
+  
+      tipoDeSeguros = await responseSeguros.json();
+      planes = await responsePlanes.json();
+      coberturas = await responseCoberturas.json();
+      aseguradoras = await responseAseguradoras.json();
+      
+      resolve(asignarOptions());
+    } catch (error) {
+      console.error('Error al cargar los datos: ', error);
+      reject(error);
+    };
+  });
+};
+
+// ASIGNAR OPCIONES
+const asignarOptions = () => {
+  // OPCIONES TIPO DE SEGURO
+  let optionsTipoSeguro = `<option class="text-center dm-sans-normal" value="">Selecciona un tipo de seguro</option>`;
+
+  tipoDeSeguros.forEach((tipo) => {
+    optionsTipoSeguro += `<option class="text-center dm-sans-normal" value="${tipo.id}">${tipo.type}</option>`;
+  });
+
+  // OPCIONES ASEGURADORAS
+  let optionsAseguradoras = `<option class="text-center dm-sans-normal" value="">Selecciona una aseguradora</option>`;
+
+  aseguradoras.forEach((aseg) => {
+    optionsAseguradoras += `<option class="text-center dm-sans-normal" value="${aseg.id}">${aseg.name}</option>`;
+  });
+
+  // OPCIONES COBERTURAS
+  let optionsCobertura = `<option class="text-center dm-sans-normal" value="">Selecciona una cobertura</option>`;
+
+  coberturas.forEach((cob) => {
+    optionsCobertura += `<option class="text-center dm-sans-normal" value="${cob.id}">${cob.name}</option>`;
+  });
+
+  tipoSeguroElement.innerHTML = optionsTipoSeguro;
+  aseguradoraElement.innerHTML = optionsAseguradoras;
+  coberturaElement.innerHTML = optionsCobertura;
+};
 
 //MOSTRAR TABLA
 function mostrarTabla(data) {
@@ -136,55 +186,6 @@ function mostrarTabla(data) {
   tablaBody.innerHTML = tablaContent;
 }
 
-// CARGAR DATOS
-const cargarDatos = () => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const responseSeguros = await fetch('../json/tiposeguro.json');
-      const responsePlanes = await fetch('../json/planes.json');
-      const responseCoberturas = await fetch ('../json/coberturas.json');
-      const responseAseguradoras = await fetch ('../json/aseguradoras.json');
-  
-      tipoDeSeguros = await responseSeguros.json();
-      planes = await responsePlanes.json();
-      coberturas = await responseCoberturas.json();
-      aseguradoras = await responseAseguradoras.json();
-      
-      resolve(asignarOptions());
-    } catch (error) {
-      console.error('Error al cargar los datos: ', error);
-      reject(error);
-    };
-  });
-};
-
-// ASIGNAR OPCIONES
-const asignarOptions = () => {
-  // OPCIONES TIPO DE SEGURO
-  let optionsTipoSeguro = `<option class="text-center dm-sans-normal" value="">Selecciona un tipo de seguro</option>`;
-
-  tipoDeSeguros.forEach((tipo) => {
-    optionsTipoSeguro += `<option class="text-center dm-sans-normal" value="${tipo.id}">${tipo.type}</option>`;
-  });
-
-  // OPCIONES ASEGURADORAS
-  let optionsAseguradoras = `<option class="text-center dm-sans-normal" value="">Selecciona una aseguradora</option>`;
-
-  aseguradoras.forEach((aseg) => {
-    optionsAseguradoras += `<option class="text-center dm-sans-normal" value="${aseg.id}">${aseg.name}</option>`;
-  });
-
-  // OPCIONES COBERTURAS
-  let optionsCobertura = `<option class="text-center dm-sans-normal" value="">Selecciona una cobertura</option>`;
-
-  coberturas.forEach((cob) => {
-    optionsCobertura += `<option class="text-center dm-sans-normal" value="${cob.id}">${cob.name}</option>`;
-  });
-
-  tipoSeguroElement.innerHTML = optionsTipoSeguro;
-  aseguradoraElement.innerHTML = optionsAseguradoras;
-  coberturaElement.innerHTML = optionsCobertura;
-};
 
 document.addEventListener("DOMContentLoaded", function () {
   asignarOptions();

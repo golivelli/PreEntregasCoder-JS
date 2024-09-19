@@ -15,30 +15,6 @@ const enviado = [`Los datos fueron enviados con éxito.`];
 
 const formulario = document.getElementById("form");
 
-// MENSAJE ERROR
-const msjError = function (mensajes) {
-  const divErrores = document.getElementById("mostrarErrores");
-  divErrores.innerHTML = "";
-
-  mensajes.forEach(function (mensaje) {
-    const p = document.createElement("p");
-    p.textContent = mensaje;
-    divErrores.appendChild(p);
-  });
-};
-
-// FORMULARIO ENVIADO
-const formEnviado = function (submit) {
-  const divEnviado = document.getElementById("mostrarEnviado");
-  divEnviado.innerHTML = "";
-
-  submit.forEach(function (sub) {
-    const p = document.createElement("p");
-    p.textContent = sub;
-    divEnviado.appendChild(p);
-  });
-};
-
 // VALIDAR CAMPOS
 function validarCampos(data) {
   let errores = [];
@@ -100,9 +76,52 @@ function contacUser (data) {
   });
 }
 
+// MOSTRAR MENSAJE ERROR
+const msjError = function (mensajes) {
+  const divErrores = document.getElementById("mostrarErrores");
+  divErrores.innerHTML = "";
+
+  mensajes.forEach(function (mensaje) {
+    const p = document.createElement("p");
+    p.textContent = mensaje;
+    divErrores.appendChild(p);
+  });
+};
+
+// MOSTRAR FORMULARIO ENVIADO
+const formEnviado = function (submit) {
+  const divEnviado = document.getElementById("mostrarEnviado");
+  divEnviado.innerHTML = "";
+
+  submit.forEach(function (sub) {
+    const p = document.createElement("p");
+    p.textContent = sub;
+    divEnviado.appendChild(p);
+  });
+};
+
+// LIMPIAR NOTIFICACIONES
+const limpiarNotificaciones = function () {
+  const divErrores = document.getElementById("mostrarErrores");
+  const divEnviado = document.getElementById("mostrarEnviado");
+
+  // LIMPIAR ERRORES
+  if (divErrores) {
+    divErrores.innerHTML = "";
+    submitError.classList.add("hidden"); 
+  }
+
+  // LIMPIAR MENSAJES DE ÉXITO
+  if (divEnviado) {
+    divEnviado.innerHTML = "";
+    msjSubmit.classList.add("hidden"); 
+  }
+};
+
 // EVENTO "SUBMIT" FORMULARIO
 form.addEventListener("submit", async function (event) {
   event.preventDefault();
+  limpiarNotificaciones();
 
   // GUARDAR DATOS
   const data = Object.fromEntries((new FormData(form)).entries());
