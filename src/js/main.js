@@ -143,7 +143,7 @@ function mostrarTabla(data) {
   if (plans.length === 0) {
     tablaContent += `
       <tr>
-        <td colspan="6" class="text-center p-2">No encontramos planes</td>
+        <td colspan="6" class="text-center p-2 dm-sans-normal">No encontramos planes</td>
       </tr> 
     `;
   }
@@ -185,7 +185,6 @@ function mostrarTabla(data) {
 
   tablaBody.innerHTML = tablaContent;
 }
-
 
 document.addEventListener("DOMContentLoaded", function () {
   asignarOptions();
